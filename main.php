@@ -16,14 +16,15 @@ $products = [
 
 function my_function($elements)
 {
-    foreach ($elements as $element) {
+    foreach ($elements as $key => $value) {
         $arr = [];
-        $arr["delivery_price"] = $element["price"] * 0.02;
+        $arr["delivery_price"] = $value["price"] * 0.02;
         $arr["shipping_cost"] = 30000.00;
-        array_push($element, $arr);
+        $elements[$key] = array_merge($elements[$key], $arr);
     }
+    return $elements;
 }
-my_function($products);
+$products = my_function($products);
 
 print_r($products);
 ?>
